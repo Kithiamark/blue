@@ -1,21 +1,37 @@
-// we need to provide a function to let the arguement in the function to be passed whenever the function is called
-function swapCase(input) {
-// we use let to asin an empty array that will be filled by the users input
-    let charachters = [];
-    // the for loop is needed to ensure that the program runs untill the condition is met
-    for (let k = 0;k< input.length;k++) {
-        let sentence = input[k];
-        // by letting k as the input will call the loop
-        // therefore we'll need an if else statement
-        if (sentence === sentence.toLowerCase()){
-        // using .push lets the array to be altered without adding to it
-        charachters.push(sentence.toUpperCase())}
-        else if (sentence === sentence.toUpperCase()){
-            charachters.push(sentence.toLowerCase())
+const readline = require('readline');
+
+// Create interface for reading input
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout  
+});
+
+// Function to swap the case of each character in a string
+function swapCase(inputString) {
+    let swappedString = '';
+    for (let i = 0; i < inputString.length; i++) {
+        let char = inputString[i];
+        if (char === char.toUpperCase()) {
+            swappedString += char.toLowerCase();
+        } else if (char === char.toLowerCase()) {
+            swappedString += char.toUpperCase();
+        } else {
+            swappedString += char;  
+            // For non-alphabetic characters
         }
-        else {charachters.push(sentence)}
     }
-// we have to return a combination of the charachters code by invoking the charachter
-//combining all the functions is only possible by the join method
-    return charachters.join()
+    return swappedString;
 }
+
+// Ask the user for input using readline
+rl.question('Enter a string to swap the case: ', (inputStr) => {
+    // Call the swapCase function with user input
+    let outputStr = swapCase(inputStr);
+
+    // Output the original and swapped strings
+    console.log("Original: ", inputStr);
+    console.log("Swapped: ", outputStr);
+
+    // Close the readline interface
+    rl.close();
+});
